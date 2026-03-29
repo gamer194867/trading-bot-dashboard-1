@@ -15,6 +15,7 @@ import { FAQPage } from './pages/FAQPage'
 import { StrategyStudioPage } from './pages/StrategyStudioPage'
 import { StrategyMarketPage } from './pages/StrategyMarketPage'
 import { DataPage } from './pages/DataPage'
+import { VisualizationPage } from './pages/VisualizationPage'
 import { BeginnerOnboardingPage } from './pages/BeginnerOnboardingPage'
 import { LoginRequiredOverlay } from './components/auth/LoginRequiredOverlay'
 import HeaderBar from './components/common/HeaderBar'
@@ -43,6 +44,7 @@ type Page =
   | 'strategy'
   | 'strategy-market'
   | 'data'
+  | 'analytics'
   | 'faq'
   | 'login'
   | 'register'
@@ -72,6 +74,7 @@ function App() {
     if (path === '/data' || hash === 'data') return 'data'
     if (path === '/dashboard' || hash === 'trader' || hash === 'details')
       return 'trader'
+    if (path === '/analytics' || hash === 'analytics') return 'analytics'
     return 'competition' // 默认为竞赛页面
   }
 
@@ -90,6 +93,7 @@ function App() {
       'competition': '/competition',
       'strategy-market': '/strategy-market',
       'data': '/data',
+      'analytics': '/analytics',
       'traders': '/traders',
       'trader': '/dashboard',
       'strategy': '/strategy',
@@ -168,6 +172,8 @@ function App() {
         setCurrentPage('strategy-market')
       } else if (path === '/data' || hash === 'data') {
         setCurrentPage('data')
+      } else if (path === '/analytics' || hash === 'analytics') {
+        setCurrentPage('analytics')
       } else if (
         path === '/dashboard' ||
         hash === 'trader' ||
@@ -348,6 +354,8 @@ function App() {
       setCurrentPage('traders')
     } else if (route === '/dashboard') {
       setCurrentPage('trader')
+    } else if (route === '/analytics') {
+      setCurrentPage('analytics')
     }
   }, [route])
 
@@ -531,6 +539,8 @@ function App() {
               <CompetitionPage />
             ) : currentPage === 'data' ? (
               <DataPage />
+            ) : currentPage === 'analytics' ? (
+              <VisualizationPage />
             ) : currentPage === 'strategy-market' ? (
               <StrategyMarketPage />
             ) : currentPage === 'traders' ? (
